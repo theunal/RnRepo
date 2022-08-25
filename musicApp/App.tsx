@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { FlatList, StyleSheet, SafeAreaView, View } from 'react-native';
 import musicDataJson from './music-data.json';
 import SearchBar from './src/components/searchBar';
 import SongCard from './src/components/songCard';
