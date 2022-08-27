@@ -20,7 +20,11 @@ const Detail = ({ detail, goToYoutube }: any) => {
                 </Text>
             </View>
             <View style={styles.button}>
-                <Button color={'white'} title='Watch on Youtube' onPress={() => goToYoutube(detail.strYoutube)} />
+                {
+                    detail.strYoutube == '' ?
+                        <Button color={'white'} title='Watch on Youtube' disabled /> :
+                        <Button color={'white'} title='Watch on Youtube' onPress={() => goToYoutube(detail.strYoutube)} />
+                }
             </View>
         </View>
     )
