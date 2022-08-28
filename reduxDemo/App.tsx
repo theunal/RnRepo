@@ -1,20 +1,61 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, SafeAreaView, Text, View } from 'react-native';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider, useSelector } from 'react-redux';
+
+const initialState = { // baslangıc degeri
+  counter: 0
+}
+
+const counterReducer = (state = initialState, action: any) => { // fonksiyonlar
+  switch (action.type) {
+    case 'increment':
+      return { ...state, counter: state.counter + 1 }
+
+    default:
+      return state
+  }
+}
+
+const store = configureStore({ reducer: counterReducer }) // store olusturma
+
+const increment = () => store.dispatch({ type: 'increment' }) // dispatch
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Provider store={store}>
+      <SafeAreaView style={{ flex: 1 }}>
+        <StatusBar style="auto" />
+        <First />
+        <Second />
+      </SafeAreaView>
+    </Provider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const First = () => {
+
+  const counter = useSelector((state: any) => state.counter)
+
+  return (
+    <View style={{ flex: 1, backgroundColor: '#eceff1' }}>
+      <Text style={{ fontSize: 50 }}>
+        First: {counter}
+      </Text>
+      <Button title='Increment' onPress={increment} />
+    </View>
+  )
+}
+
+const Second = () => {
+
+  const counter = useSelector((state: any) => state.counter)
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Text style={{ fontSize: 50 }}>
+        Second : {counter}
+      </Text>
+    </View>
+  )
+}
