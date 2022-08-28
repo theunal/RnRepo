@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "foodApp",
-    "slug": "foodApp",
+    "name": "reduxDemo",
+    "slug": "reduxDemo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,8 +24,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.unal"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
