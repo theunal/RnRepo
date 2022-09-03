@@ -6,20 +6,20 @@ const JobCard = ({ job, onPress, favorite, setFavorite }: any) => {
         <TouchableOpacity style={styles.container} onPress={favorite ? undefined : () => onPress(job)}>
 
             <Text style={styles.jobName}>
-                {job.name}
+                {job?.name}
             </Text>
             <Text style={styles.companyName}>
-                {job.company.name}
+                {job?.company?.name}
             </Text>
 
             <View style={styles.locationContainer}>
                 <Text style={styles.location}>
-                    {job.locations[0].name}
+                    {job.locations[0]?.name}
                 </Text>
             </View>
 
             <Text style={styles.level}>
-                {job.levels[0].name}
+                {job?.levels[0].name}
             </Text>
 
             {
