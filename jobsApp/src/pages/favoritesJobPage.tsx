@@ -1,4 +1,4 @@
-import { StyleSheet, SafeAreaView, FlatList, Text } from "react-native";
+import { StyleSheet, SafeAreaView, FlatList } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useDispatch, useSelector } from "react-redux";
 import JobCard from "../components/jobCard";
@@ -12,13 +12,15 @@ const FavoritesJobPage = () => {
 
     const dispatch = useDispatch()
 
-    const toastMessage = () => Toast.show('Favorilerden Silindi', {
-        position: Toast.positions.CENTER,
-        opacity: 1,
-        containerStyle: {
-            backgroundColor: 'red'
-        }
-    })
+    const toastMessage = () => {
+        Toast.show('Favorilerden Silindi', {
+            position: Toast.positions.CENTER,
+            opacity: 1,
+            containerStyle: {
+                backgroundColor: 'red'
+            }
+        })
+    }
 
     const delete_job = (job: any) => dispatch({ type: 'delete_job', payload: { id: job.id } })
 

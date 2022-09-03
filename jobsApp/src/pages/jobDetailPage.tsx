@@ -3,7 +3,7 @@ import Toast from 'react-native-root-toast';
 import Buttons from "../components/buttons";
 import Body from "../components/body";
 import Head from "../components/head";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const JobDetailPage = ({ route }: any) => {
 
@@ -13,20 +13,28 @@ const JobDetailPage = ({ route }: any) => {
 
     const dispatch = useDispatch()
 
-    const setFavorite = (job: any) => {
-        add_job(job)
-        toastMessage()
+    const add_job = (job: any) => {
+
+        !isAdded(job.id) ?
+            add(job) :
+            message('Favorilere Zaten Eklenmiş')
     }
 
-    const add_job = (job: any) => dispatch({ type: 'add_job', payload: { favouriteJob: job } })
-
-    const toastMessage = () => Toast.show('Favorilere Eklendi', {
+    const message = (message: string) => Toast.show(message, {
         position: Toast.positions.CENTER,
         opacity: 1,
         containerStyle: {
             backgroundColor: 'red'
         }
     })
+
+    const add = (job: any) => {
+        dispatch({ type: 'add_job', payload: { favouriteJob: job } })
+        message('Favorilere Eklendi')
+    }
+
+    const favoriteJobs: any[] = useSelector((state: any) => state.favoriteJobs)
+    const isAdded = (id: number) => favoriteJobs.some(x => x.id == id)
 
     return (
         <ScrollView style={styles.container}>
@@ -40,7 +48,7 @@ const JobDetailPage = ({ route }: any) => {
             <Body jobDetail={jobDetail} />
 
             {/* butonlar  */}
-            <Buttons submit={submit} jobDetail={jobDetail} setFavorite={setFavorite} />
+            <Buttons submit={submit} jobDetail={jobDetail} setFavorite={add_job} />
 
         </ScrollView>
     )
