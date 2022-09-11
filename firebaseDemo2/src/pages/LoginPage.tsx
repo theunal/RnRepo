@@ -10,6 +10,7 @@ import MessageTool from '../utilities/messageTool';
 const LoginPage = ({ navigation }: any) => {
 
     const goToRegisterPage = () => navigation.navigate('RegisterPage')
+    const goToMessagePage = () => navigation.replace('MessagePage')
 
     const initialFormValue: Model = {
         username: '',
@@ -21,6 +22,7 @@ const LoginPage = ({ navigation }: any) => {
             .auth()
             .signInWithEmailAndPassword(values.username, values.password)
             .then(x => {
+                goToMessagePage()
                 MessageTool('login')
             })
             .catch(x => {
